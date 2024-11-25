@@ -1,4 +1,19 @@
-window.addEventListener('scroll', () => {
+// Debounce function to limit scroll event firing
+function debounce(func, wait) {
+    let timeout;
+    return function() {
+        const context = this;
+        const args = arguments;
+        clearTimeout(timeout);
+        timeout = setTimeout(() => func.apply(context, args), wait);
+    };
+}
+
+// Use RequestAnimationFrame for smooth animations
+let ticking = false;
+
+// Initial check function
+function checkScrollPosition() {
     const video = document.getElementById('bg-video');
     const title = document.querySelector('.title');
     const viewportHeight = window.innerHeight;
@@ -11,64 +26,68 @@ window.addEventListener('scroll', () => {
         video.style.visibility = 'hidden';
         video.style.opacity = '0';
         video.pause();
+        title.style.opacity = '0';
+        title.style.visibility = 'hidden';
     } else {
         video.style.visibility = 'visible';
-        if (video.paused) {
-            video.play();
-        }
+        video.play();
         const scrollPercent = scrollY / threshold;
         const opacity = Math.max(0.1, 0.8 - scrollPercent * 1.4);
         video.style.opacity = opacity;
         
-        // Fade out title as user scrolls
         title.style.opacity = Math.max(0, 1 - (scrollY / (viewportHeight * 0.5)));
+        title.style.visibility = 'visible';
+    }
+}
+
+// Run check immediately when page loads
+document.addEventListener('DOMContentLoaded', checkScrollPosition);
+// Also check on page reload
+window.onload = checkScrollPosition;
+
+// Rest of your scroll event code...
+window.addEventListener('scroll', () => {
+    if (!ticking) {
+        requestAnimationFrame(() => {
+            checkScrollPosition(); // Use the same function for consistency
+            ticking = false;
+        });
+        ticking = true;
     }
 });
 
-// Optional: Pause video when tab is not visible
+// Optimize essay fragments fade in
+const observerOptions = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.1
+};
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target); // Stop observing once visible
+        }
+    });
+}, observerOptions);
+
+// Observe all essay fragments
+document.querySelectorAll('.essay-fragment').forEach(fragment => {
+    observer.observe(fragment);
+});
+
+// Handle video playback on visibility change
 document.addEventListener('visibilitychange', () => {
     const video = document.getElementById('bg-video');
-    if (document.hidden) {
+    const scrollY = window.scrollY;
+    const threshold = window.innerHeight;
+    
+    if (document.hidden || scrollY > threshold) {
         video.pause();
-    } else if (window.scrollY <= window.innerHeight) {
+    } else {
         video.play();
     }
-});
-
-$(document).ready(function() {
-    // Check if element is in viewport
-    function isElementInViewport(el) {
-        const rect = el.getBoundingClientRect();
-        return (
-            rect.top >= 0 &&
-            rect.left >= 0 &&
-            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-        );
-    }
-
-    // Handle scroll events for fade-in
-    function handleScrollAnimation() {
-        $('.fade-in').each(function() {
-            if (isElementInViewport(this)) {
-                $(this).addClass('visible');
-            }
-        });
-    }
-
-    // Throttle scroll events
-    let scrollTimeout;
-    $(window).on('scroll', function() {
-        if (scrollTimeout) {
-            window.cancelAnimationFrame(scrollTimeout);
-        }
-        scrollTimeout = window.requestAnimationFrame(function() {
-            handleScrollAnimation();
-        });
-    });
-
-    // Initial check for visible elements
-    handleScrollAnimation();
 });
 
 
