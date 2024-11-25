@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shrinking Header</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* CSS directly included for convenience */
+
+    /* Base styling for the full-page header */
+    #full-page-header {
+      position: sticky;
+      top: 0;
+      height: 100vh; /* Full height for the opening screen */
+      background-color: #333;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      font-size: 4rem; /* Large font for the full-page view */
+      line-height: 1.2;
+      transition: height 0.5s ease, font-size 0.5s ease;
+      z-index: 1000;
+    }
+
+    /* Shrink effect as the user scrolls */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    /* Trigger the shrink effect based on the scroll position */
+    body:has(#content):not(:hover) #full-page-header {
+      height: 60px; /* Shrink height */
+      font-size: 1.5rem; /* Adjust font size */
+      line-height: 1;
+    }
+
+    #content {
+      height: 3000px;
+      padding: 20px;
+      background: #f4f4f4;
+    }
+
+    #content p {
+      margin: 20px 0;
+      font-size: 1.2rem;
+    }
+  </style>
+</head>
+<body>
+  <header id="full-page-header">
+    Welcome to My Website
+  </header>
+  <div id="content">
+    <p>Scroll down to see the header shrink into a sticky navigation bar!</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque interdum diam vitae justo.</p>
+    <p>Keep scrolling for the effect.</p>
+  </div>
+</body>
+</html>

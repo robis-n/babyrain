@@ -1,0 +1,87 @@
+@font-face {
+    font-family: 'Pilowlava';
+    src: url('../../fonts/pilowlava-atome.woff2') format('woff2');
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #1a1a1a;
+}
+
+#img {
+    width: 100vw;
+    height: 100vh;
+    background-color: #1a1a1a;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -2;
+}
+
+#bg-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    opacity: 0.8;
+    mix-blend-mode: soft-light;
+    z-index: -1;
+}
+
+.title-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    text-align: center;
+}
+
+.title {
+    font-family: 'Pilowlava', serif;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 8vw;
+    letter-spacing: 2px;
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+    transition: opacity 0.3s ease-out;
+}
+
+.essays-container {
+    padding: 120vh 20vw 20vh 20vw; /* Start after 120vh */
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.essay-fragment {
+    margin-bottom: 40vh;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.8s ease-out;
+}
+
+.essay-fragment.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.essay-fragment p {
+    font-family: 'Pilowlava', serif;
+    font-size: 2vw;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.essay-fragment .author {
+    font-family: serif;
+    font-style: italic;
+    font-size: 1.2vw;
+    opacity: 0.6;
+}
+
+/* Optional: style for when fragments are in view */
+.essay-fragment.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
