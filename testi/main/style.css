@@ -62,10 +62,9 @@ body {
 .essay-fragment {
     margin-bottom: 40vh;
     opacity: 0;
-    transform: translateY(20px);
-    transition: all 0.8s ease-out;
+    transform: translateY(40px);
+    transition: all 1s ease-out;
     will-change: opacity, transform;
-    transform: translateZ(0);
 }
 
 .essay-fragment.visible {
@@ -85,10 +84,4 @@ body {
     font-style: italic;
     font-size: 1.2vw;
     opacity: 0.6;
-}
-
-/* Optional: style for when fragments are in view */
-.essay-fragment.visible {
-    opacity: 1;
-    transform: translateY(0);
 }

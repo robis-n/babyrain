@@ -6,11 +6,33 @@
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="switch_up.css">
+    <link rel="stylesheet" href="navstyle.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="script.js" defer></script>
+    <script src="nav.js" defer></script>
     <script src="switch_up.js" defer></script>
 </head>
 <body>
+    <nav class="nav">
+        <div class="nav__logo">
+            <a href="#">LOGO</a>
+        </div>
+        <div id="mainListDiv" class="main_list nav__wrapper">
+            <ul class="navlinks nav__wrapper__list">
+                <li class="nav__wrapper__list__item"><a href="#">About</a></li>
+                <li class="nav__wrapper__list__item"><a href="#">Portfolio</a></li>
+                <li class="nav__wrapper__list__item"><a href="#">Services</a></li>
+                <li class="nav__wrapper__list__item"><a href="#">Contact</a></li>
+            </ul>
+        </div>
+        <span class="navTrigger nav__toggle-btn">
+            <i></i>
+            <i></i>
+            <i></i>
+        </span>
+    </nav>
+
+
     <div class="content">
         <div id="img"></div>
         <video id="bg-video" autoplay muted loop playsinline>
@@ -22,17 +44,17 @@
         </div>
         
         <div class="essays-container">
-            <div class="essay-fragment fade-in" loading="lazy">
+            <div class="essay-fragment" loading="lazy">
                 <p>"In the depths of winter, I finally learned that within me there lay an invincible summer."</p>
                 <span class="author">- Albert Camus</span>
             </div>
             
-            <div class="essay-fragment fade-in" loading="lazy">
+            <div class="essay-fragment" loading="lazy">
                 <p>"The only way to deal with an unfree world is to become so absolutely free that your very existence is an act of rebellion."</p>
                 <span class="author">- Albert Camus</span>
             </div>
             
-            <div class="essay-fragment fade-in" loading="lazy">
+            <div class="essay-fragment" loading="lazy">
                 <p>"Man is condemned to be free; because once thrown into the world, he is responsible for everything he does."</p>
                 <span class="author">- Jean-Paul Sartre</span>
             </div>

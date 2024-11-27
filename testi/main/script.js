@@ -57,6 +57,8 @@ window.addEventListener('scroll', () => {
 });
 
 // Optimize essay fragments fade in
+let lastScrollY = window.scrollY;
+
 const observerOptions = {
     root: null,
     rootMargin: '0px',
@@ -67,7 +69,8 @@ const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
             entry.target.classList.add('visible');
-            observer.unobserve(entry.target); // Stop observing once visible
+        } else {
+            entry.target.classList.remove('visible');
         }
     });
 }, observerOptions);
